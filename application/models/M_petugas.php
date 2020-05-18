@@ -64,6 +64,10 @@
 			return $this->db->query($query)->result();
 		}
 
+		public function barang_barcode($barcode){
+			return $this->db->get_where('barang', ['barcode' => $barcode])->row();
+		}
+
 	}
 
  ?>

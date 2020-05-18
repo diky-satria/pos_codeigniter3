@@ -205,6 +205,29 @@
 			$this->load->view('petugas/laporan_pertgl_exel', $data);
 		}
 
+		public function cek_barang(){
+			$data['judul'] = 'cek barang';
+			$data['barcode'] = '';
+			$cek = $this->input->post('cek');
+			if(isset($cek)){
+				$data['barcode'] = $this->input->post('barcode');
+				$data['barang'] = $this->M_petugas->barang_barcode($data['barcode']);
+				if(!$data['barang']){
+					?>
+					<script type="text/javascript">
+					alert('Barcode tidak terdaftar');
+					window.location.href="<?php echo base_url() ?>petugas/cek_barang";
+					</script>
+					<?php
+				}
+			}
+			$this->load->view('templates/user_header', $data);
+			$this->load->view('templates/user_topbar');
+			$this->load->view('templates/user_sidebar');
+			$this->load->view('petugas/cek_barang', $data);
+			$this->load->view('templates/user_footer');
+		}
+
 	}
 
  ?>
