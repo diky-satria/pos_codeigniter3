@@ -168,6 +168,43 @@
 			$this->load->view('petugas/struk', $data);
 		}
 
+		public function laporan(){
+			$data['judul'] = 'laporan penjualan';
+			$data['tglm'] = '-';
+			$data['tgla'] = '-';
+			$cari = $this->input->post('cari');
+			if(isset($cari)){
+				$data['tglm'] = $this->input->post('tglm');
+				$data['tgla'] = $this->input->post('tgla');
+				$data['laporan'] = $this->M_petugas->laporan($data['tglm'], $data['tgla']);
+				$this->load->view('templates/user_header', $data);
+				$this->load->view('templates/user_topbar');
+				$this->load->view('templates/user_sidebar');
+				$this->load->view('petugas/laporan', $data);
+				$this->load->view('templates/user_footer');	
+			}else{
+				?>
+				<script type="text/javascript">
+				window.location.href="<?php echo base_url() ?>petugas?kode=<?php echo kode_random(10) ?>";
+				</script>
+				<?php
+			}
+		}
+
+		public function laporan_pertgl_pdf(){
+			$data['tglm'] = $this->input->get('tglm');
+			$data['tgla'] = $this->input->get('tgla');
+			$data['laporan'] = $this->M_petugas->laporan($data['tglm'], $data['tgla']);
+			$this->load->view('petugas/laporan_pertgl_pdf', $data);
+		}
+
+		public function laporan_pertgl_exel(){
+			$data['tglm'] = $this->input->get('tglm');
+			$data['tgla'] = $this->input->get('tgla');
+			$data['laporan'] = $this->M_petugas->laporan($data['tglm'], $data['tgla']);
+			$this->load->view('petugas/laporan_pertgl_exel', $data);
+		}
+
 	}
 
  ?>

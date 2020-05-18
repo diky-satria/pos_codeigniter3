@@ -59,6 +59,11 @@
 			return $this->db->query($query);
 		}
 
+		public function laporan($tglm, $tgla){
+			$query = "SELECT * FROM pembelian WHERE tanggal_beli between '$tglm' AND '$tgla'";
+			return $this->db->query($query)->result();
+		}
+
 	}
 
  ?>

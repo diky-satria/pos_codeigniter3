@@ -15,6 +15,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Penjualan
                     </a>
+                    <a class="nav-link" data-toggle="modal" data-target="#laporan">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Laporan
+                    </a>
                     <a class="nav-link" data-toggle="modal" data-target="#logout">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Logout
