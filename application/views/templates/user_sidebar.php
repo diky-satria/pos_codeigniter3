@@ -24,7 +24,8 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="<?php echo base_url() ?>petugas/cek_barang">Cek barang</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">Barang masuk</a>
+                            <a class="nav-link" href="<?php echo base_url() ?>petugas/barang_masuk">Barang masuk</a>
+                            <a class="nav-link" href="<?php echo base_url() ?>petugas/riwayat_barang_masuk">Riwayat barang masuk</a>
                         </nav>
                     </div> 
 

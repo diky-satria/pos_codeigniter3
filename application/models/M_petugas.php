@@ -68,6 +68,15 @@
 			return $this->db->get_where('barang', ['barcode' => $barcode])->row();
 		}
 
+		public function barang_masuk($data){
+			return $this->db->insert('barang_masuk', $data);
+		}
+
+		public function riwayat_barang_masuk(){
+			$query = "SELECT * FROM barang_masuk JOIN barang ON barang_masuk.kode_barcode=barang.barcode WHERE barang_masuk.status = 'masuk' ORDER BY barang_masuk.id_barang_masuk ASC";
+			return $this->db->query($query)->result();
+		}
+
 	}
 
  ?>

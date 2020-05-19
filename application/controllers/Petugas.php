@@ -228,6 +228,55 @@
 			$this->load->view('templates/user_footer');
 		}
 
+		public function barang_masuk(){
+			$data['judul'] = 'Barang Masuk';
+			$data['barcode'] = '';
+			$tambah = $this->input->post('tambahkan');
+			if(isset($tambah)){
+				$data['barcode'] = $this->input->post('barcode');
+				$data['barang'] = $this->M_petugas->barang_barcode($data['barcode']);
+				if(!$data['barang']){
+					?>
+					<script type="text/javascript">
+					alert('Barcode tidak terdaftar');
+					window.location.href="<?php echo base_url() ?>petugas/barang_masuk";
+					</script>
+					<?php
+				}
+			}
+			$konfirmasi = $this->input->post('konfirmasi');
+			if(isset($konfirmasi)){
+				$data = [
+					'kode_barcode' => $this->input->post('kode'),
+					'jumlah' => $this->input->post('jumlah'),
+					'kasir' => $this->session->userdata('nama_user'),
+					'status' => 'masuk'
+				];
+				$bar = $this->M_petugas->barang_masuk($data);
+				?>
+				<script type="text/javascript">
+				alert('Barang berhasil ditambahkan');
+				window.location.href="<?php echo base_url() ?>petugas/barang_masuk";
+				</script>
+				<?php
+			}
+			$this->load->view('templates/user_header', $data);
+			$this->load->view('templates/user_topbar');
+			$this->load->view('templates/user_sidebar');
+			$this->load->view('petugas/barang_masuk', $data);
+			$this->load->view('templates/user_footer');
+		}
+
+		public function riwayat_barang_masuk(){
+			$data['judul'] = 'riwayat barang masuk';
+			$data['barang_masuk'] = $this->M_petugas->riwayat_barang_masuk();
+			$this->load->view('templates/user_header', $data);
+			$this->load->view('templates/user_topbar');
+			$this->load->view('templates/user_sidebar');
+			$this->load->view('petugas/riwayat_barang_masuk', $data);
+			$this->load->view('templates/user_footer');
+		}
+
 	}
 
  ?>
