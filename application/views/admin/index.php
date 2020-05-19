@@ -27,4 +27,13 @@
 	        </div>
 	    </a>
     </div>
+     <div class="col-xl-3 col-md-6">
+	    <a href="<?php echo base_url() ?>admin/penjualan_collapse" class="text-decoration-none">
+	        <div class="card bg-primary text-white mb-4">
+	            <div class="card-body">Penjualan collpase
+	            	<div class="display-4"><b>4</b></div>
+	            </div>
+	        </div>
+	    </a>
+    </div>
 </div>

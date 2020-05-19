@@ -239,6 +239,28 @@
 															</div>');
 			redirect('admin/barang');
 		}
+
+		public function penjualan_collapse(){
+			$data['judul'] = 'penjualan collapse';
+			$data['collapse'] = $this->M_admin->collapse();
+			$this->load->view('templates/user_header', $data);
+			$this->load->view('templates/user_topbar');
+			$this->load->view('templates/user_sidebar');
+			$this->load->view('admin/penjualan_collapse', $data);
+			$this->load->view('templates/user_footer');	
+		}
+
+		public function kembalikan_barang(){
+			$id = $this->input->get('id');
+			$barcode = $this->input->get('barcode');
+			$jumlah = $this->input->get('jumlah');
+			$this->M_admin->kembalikan_barang($barcode, $jumlah);
+			$this->M_admin->hapus_penjualan_barcode($id);
+			$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+															  Barang berhasil dikembalikan, stok barang kembali bertambah
+															</div>');
+			redirect('admin/penjualan_collapse');
+		}
 	}
 
  ?>

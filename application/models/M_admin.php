@@ -69,6 +69,22 @@
 			return $this->db->get('barang')->num_rows();
 		}
 
+		public function collapse(){
+			$query = "SELECT * FROM penjualan 
+					JOIN barang ON penjualan.kode_barcode=barang.barcode
+					WHERE penjualan.status='beli'";
+			return $this->db->query($query)->result();
+		}
+
+		public function kembalikan_barang($barcode, $jumlah){
+			$query = "UPDATE barang SET stok=(stok+$jumlah) WHERE barcode='$barcode'";
+			return $this->db->query($query);
+		}
+
+		public function hapus_penjualan_barcode($id){
+			return $this->db->delete('penjualan', ['id_penjualan' => $id]);
+		}
+
 	}
 
  ?>
