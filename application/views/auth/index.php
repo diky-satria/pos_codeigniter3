@@ -20,7 +20,7 @@
                                         <small id="emailHelp" class="form-text text-danger"><?php echo form_error('password'); ?></small>
                                     </div>
                                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="password.html">Lupa Password ?</a>
+                                        <a class="small" href="<?php echo base_url() ?>auth/lupa_password">Lupa Password ?</a>
                                         <button type="submit" class="btn btn-sm btn-primary" style="border-radius:15px 0 15px 0;">Login</button>
                                     </div>
                                 </form>
