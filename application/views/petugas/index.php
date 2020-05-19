@@ -57,7 +57,7 @@
 							</tr>
 						<?php 
 							$sub_total = $sub_total + $b->total_pembelian;
-							$p_diskon = $sub_total * 10 / 100;
+							$p_diskon = $sub_total * $diskon->diskon / 100;
 							$total = $sub_total - $p_diskon;
 						 ?>
 						<?php endforeach; ?>
@@ -74,7 +74,7 @@
 							<tr>
 								<th colspan="5" style="text-align:right;">Diskon</th>
 								<td>
-									<input type="text" value="10%" name="diskon" class="form-control" readonly>
+									<input type="text" value="<?php echo $diskon->diskon ?>%" name="diskon" class="form-control" readonly>
 								</td>
 								<td></td>
 							</tr>

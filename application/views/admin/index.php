@@ -27,11 +27,38 @@
 	        </div>
 	    </a>
     </div>
-     <div class="col-xl-3 col-md-6">
+    <div class="col-xl-3 col-md-6">
 	    <a href="<?php echo base_url() ?>admin/penjualan_collapse" class="text-decoration-none">
 	        <div class="card bg-primary text-white mb-4">
 	            <div class="card-body">Penjualan collpase
-	            	<div class="display-4"><b>4</b></div>
+	            	<div class="display-4"><b><?php echo $count_collapse ?></b></div>
+	            </div>
+	        </div>
+	    </a>
+    </div>
+    <div class="col-xl-3 col-md-6">
+	    <a href="<?php echo base_url() ?>admin/diskon" class="text-decoration-none">
+	        <div class="card bg-primary text-white mb-4">
+	            <div class="card-body">Diskon
+	            	<div class="display-4"><b><?php echo $diskon->diskon ?>%</b></div>
+	            </div>
+	        </div>
+	    </a>
+    </div>
+    <div class="col-xl-3 col-md-6">
+	    <a href="<?php echo base_url() ?>admin/barang_masuk" class="text-decoration-none">
+	        <div class="card bg-primary text-white mb-4">
+	            <div class="card-body">Barang masuk
+	            	<div class="display-4"><b><?php echo $count_barang_masuk ?></b></div>
+	            </div>
+	        </div>
+	    </a>
+    </div>
+    <div class="col-xl-3 col-md-6">
+	    <a href="<?php echo base_url() ?>admin/riwayat_barang_masuk" class="text-decoration-none">
+	        <div class="card bg-primary text-white mb-4">
+	            <div class="card-body">Riwayat barang masuk
+	            	<div class="display-4"><b><?php echo $count_riwayat ?></b></div>
 	            </div>
 	        </div>
 	    </a>

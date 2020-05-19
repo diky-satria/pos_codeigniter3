@@ -77,6 +77,10 @@
 			return $this->db->query($query)->result();
 		}
 
+		public function diskon(){
+			return $this->db->get_where('diskon', ['id_diskon' => 1])->row();
+		}
+
 	}
 
  ?>

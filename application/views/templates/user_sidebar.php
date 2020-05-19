@@ -33,6 +33,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Laporan
                     </a>
+                    <a class="nav-link" href="<?php echo base_url() ?>petugas/ubah_password">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Ubah password
+                    </a>
                     <a class="nav-link" data-toggle="modal" data-target="#logout">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Logout

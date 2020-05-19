@@ -13,6 +13,7 @@
 			$data['judul'] = 'penjualan';
 			$data['kode'] = $this->input->get('kode');
 			$data['barang'] = $this->M_petugas->get_barang($data['kode']);
+			$data['diskon'] = $this->M_petugas->diskon();
 			$this->load->view('templates/user_header', $data);
 			$this->load->view('templates/user_topbar');
 			$this->load->view('templates/user_sidebar');
@@ -275,6 +276,49 @@
 			$this->load->view('templates/user_sidebar');
 			$this->load->view('petugas/riwayat_barang_masuk', $data);
 			$this->load->view('templates/user_footer');
+		}
+
+		public function ubah_password(){
+			$data['judul'] = 'ubah password';
+			$user = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row();
+			$this->form_validation->set_rules('password_lama', 'Password lama', 'trim|required|min_length[6]',
+				[ 'min_length' => 'Password minimal 6 karakter' ]);
+			$this->form_validation->set_rules('password_baru', 'Password baru', 'trim|required|min_length[6]',
+				[ 'min_length' => 'Password minimal 6 karakter' ]);
+			$this->form_validation->set_rules('konfirmasi_password', 'Konfirmasi password', 'trim|required|matches[password_baru]',
+				[ 'matches' => 'Konfirmasi password salah' ]);
+			if($this->form_validation->run() == FALSE){
+				$this->load->view('templates/user_header', $data);
+				$this->load->view('templates/user_topbar');
+				$this->load->view('templates/user_sidebar');
+				$this->load->view('petugas/ubah_password', $data);
+				$this->load->view('templates/user_footer');	
+			}else{	
+				$password_lama = $this->input->post('password_lama');
+				$password_baru = $this->input->post('password_baru');
+				$konfirmasi_password = password_hash($this->input->post('konfirmasi_password'), PASSWORD_DEFAULT);
+				if(password_verify($password_lama, $user->password)){
+					if($password_baru == $password_lama){
+						$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+															  Password baru tidak boleh sama dengan password lama
+															</div>');
+						redirect('petugas/ubah_password');
+					}else{
+						$this->db->set('password', $konfirmasi_password);
+						$this->db->where('username', $this->session->userdata('username'));
+						$this->db->update('user');
+						$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+															  Password berhasil diganti
+															</div>');
+						redirect('petugas/ubah_password');
+					}
+				}else{
+					$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+															  Password lama salah
+															</div>');
+					redirect('petugas/ubah_password');
+				}
+			}
 		}
 
 	}

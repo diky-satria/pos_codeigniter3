@@ -17,6 +17,10 @@
 			$data['count_petugas'] = $this->M_admin->count_petugas();
 			$data['count_supplier'] = $this->M_admin->count_supplier();
 			$data['count_barang'] = $this->M_admin->count_barang();
+			$data['count_collapse'] = $this->M_admin->count_collapse();
+			$data['count_barang_masuk'] = $this->M_admin->count_barang_masuk();
+			$data['count_riwayat'] = $this->M_admin->count_riwayat();
+			$data['diskon'] = $this->M_admin->get_diskon();
 			$this->load->view('templates/user_header', $data);
 			$this->load->view('templates/user_topbar');
 			$this->load->view('templates/user_sidebar');
@@ -260,6 +264,87 @@
 															  Barang berhasil dikembalikan, stok barang kembali bertambah
 															</div>');
 			redirect('admin/penjualan_collapse');
+		}
+
+		public function diskon(){
+			$data['judul'] = 'diskon';
+			$data['diskon'] = $this->M_admin->get_diskon();
+			$this->form_validation->set_rules('diskon', 'Diskon', 'trim|required|numeric',
+				[ 'numeric' => 'Data harus angka' ]);
+			if($this->form_validation->run() == FALSE){
+				$this->load->view('templates/user_header', $data);
+				$this->load->view('templates/user_topbar');
+				$this->load->view('templates/user_sidebar');
+				$this->load->view('admin/diskon', $data);
+				$this->load->view('templates/user_footer');		
+			}else{
+				$diskon = $this->input->post('diskon');
+				$this->M_admin->ubah_diskon($diskon);
+				$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+															  Diskon berhasil diubah
+															</div>');
+				redirect('admin/diskon');
+			}
+		}
+
+		public function barang_masuk(){
+			$data['judul'] = 'barang masuk';
+			$data['barang_masuk'] = $this->M_admin->barang_masuk();
+			$this->load->view('templates/user_header', $data);
+			$this->load->view('templates/user_topbar');
+			$this->load->view('templates/user_sidebar');
+			$this->load->view('admin/barang_masuk', $data);
+			$this->load->view('templates/user_footer');
+		}
+
+		public function ubah_barang_masuk($id){
+			$data['judul'] = 'ubah barang masuk';
+			$data['barang_masuk'] = $this->M_admin->barang_masuk_id($id);
+			$ubah = $this->input->post('ubah');
+			if(isset($ubah)){
+				$id = $this->input->post('id');
+				$jumlah = $this->input->post('jumlah');
+				$this->M_admin->ubah_barang_masuk_id($id, $jumlah);
+				$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+															  Jumlah barang berhasil diubah
+															</div>');
+				redirect('admin/barang_masuk');
+			}
+			$this->load->view('templates/user_header', $data);
+			$this->load->view('templates/user_topbar');
+			$this->load->view('templates/user_sidebar');
+			$this->load->view('admin/ubah_barang_masuk', $data);
+			$this->load->view('templates/user_footer');
+		}
+
+		public function konfirmasi_barang_masuk(){
+			$id = $this->input->get('id');
+			$barcode = $this->input->get('barcode');
+			$jumlah = $this->input->get('jumlah');
+			$this->M_admin->konfirmasi_jumlah($barcode, $jumlah);
+			$this->M_admin->konfirmasi_barang_masuk($id);
+			$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+															  Berhasil konfirmasi barang masuk
+															</div>');
+			redirect('admin/barang_masuk');
+		}
+
+		public function riwayat_barang_masuk(){
+			$data['judul'] = 'riwayat barang masuk';
+			$data['riwayat'] = $this->M_admin->riwayat_barang_masuk();
+			$this->load->view('templates/user_header', $data);
+			$this->load->view('templates/user_topbar');
+			$this->load->view('templates/user_sidebar');
+			$this->load->view('admin/riwayat_barang_masuk', $data);
+			$this->load->view('templates/user_footer');
+		}
+
+		public function hapus_riwayat($id){
+			$this->M_admin->hapus_riwayat($id);
+			$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+															  Riwayat berhasil dihapus
+															</div>');
+			redirect('admin/riwayat_barang_masuk');
 		}
 	}
 
