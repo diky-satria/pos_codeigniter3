@@ -12,7 +12,7 @@
                 <?php endif; ?>
                     <div class="sb-sidenav-menu-heading">Petugas</div>
                     <a class="nav-link" href="<?php echo base_url() ?>petugas?kode=<?php echo kode_random(10) ?>">
-                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                         Penjualan
                     </a>
 
@@ -30,7 +30,7 @@
                     </div> 
 
                     <a class="nav-link" data-toggle="modal" data-target="#laporan">
-                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
                         Laporan
                     </a>
                     <a class="nav-link" href="<?php echo base_url() ?>petugas/ubah_password">
@@ -38,7 +38,7 @@
                         Ubah password
                     </a>
                     <a class="nav-link" data-toggle="modal" data-target="#logout">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                         Logout
                     </a>
                 </div>
